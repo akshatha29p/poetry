@@ -11,7 +11,7 @@ jobs:
 
     env:
       IMAGE_NAME: failure-test
-      BUILDER: ap-docker/paketobuildpacks/builder-jammy-base
+      BUILDER: hts2-ap-docker.jfrog.io/paketobuildpacks/builder-jammy-base
       POETRY_HTTP_BASIC_GRAINGER_ARTIFACTORY_USERNAME: "${{ secrets.JF_USER }}"
       POETRY_HTTP_BASIC_GRAINGER_ARTIFACTORY_PASSWORD: "${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}"
 
