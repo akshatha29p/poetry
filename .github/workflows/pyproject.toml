@@ -1,4 +1,0 @@
-[[tool.poetry.source]]
-name = "ap-pypi-remote"
-url = "https://hts2.jfrog.io/artifactory/api/pypi/ap-pypi-remote/simple"
-default = true
