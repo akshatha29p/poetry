@@ -34,6 +34,9 @@ jobs:
             | sudo tar -C /usr/local/bin/ -xz pack
           pack version
 
+      - name: List repo files
+        run: ls -R
+
       - name: Verify Python build files
         run: |
           if [ ! -f "pyproject.toml" ] && [ ! -f "requirements.txt" ]; then
