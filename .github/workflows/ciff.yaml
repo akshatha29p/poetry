@@ -28,8 +28,11 @@ jobs:
 
       - name: Install pack CLI
         run: |
-          curl -sSL "https://github.com/buildpacks/pack/releases/latest/download/pack-linux-amd64.tgz" \
-          | sudo tar -C /usr/local/bin/ -xz pack
+          PACK_VERSION=$(curl -s https://api.github.com/repos/buildpacks/pack/releases/latest | grep tag_name | cut -d '"' -f4)
+          echo "Installing pack version ${PACK_VERSION}"
+          curl -sL "https://github.com/buildpacks/pack/releases/download/${PACK_VERSION}/pack-${PACK_VERSION}-linux.tgz" \
+            | sudo tar -C /usr/local/bin/ -xz pack
+          pack version
 
       - name: Build the image using Paketo buildpacks
         run: |
