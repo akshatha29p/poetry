@@ -34,6 +34,15 @@ jobs:
             | sudo tar -C /usr/local/bin/ -xz pack
           pack version
 
+      - name: Verify Python build files
+        run: |
+          if [ ! -f "pyproject.toml" ] && [ ! -f "requirements.txt" ]; then
+            echo "❌ Error: pyproject.toml or requirements.txt not found!"
+            exit 1
+          else
+            echo "✅ Python build file detected."
+          fi
+
       - name: Build the image using Paketo buildpacks
         run: |
           pack build $IMAGE_NAME \
