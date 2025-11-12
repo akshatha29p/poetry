@@ -2,6 +2,15 @@
 build-backend = 'poetry.core.masonry.api'
 requires = ['poetry-core']
 
+[tool]
+[tool.poetry]
+authors = []
+description = 'unit-test'
+name = 'failure-test'
+package-mode = false
+readme = 'README.md'
+version = '0.1.0
+
 [tool.poetry.dependencies]
 flask = '3.0.3'
 gunicorn = '^23.0.0'
