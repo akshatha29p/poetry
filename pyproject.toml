@@ -1,3 +1,7 @@
+[build-system]
+build-backend = 'poetry.core.masonry.api'
+requires = ['poetry-core']
+
 [[tool.poetry.source]]
 name = "ap-pypi-remote"
 url = "https://hts2.jfrog.io/artifactory/api/pypi/ap-pypi-remote/simple"
