@@ -12,8 +12,8 @@ jobs:
     env:
       IMAGE_NAME: failure-test
       BUILDER: hts2-ap-docker.jfrog.io/paketobuildpacks/builder-jammy-base
-      POETRY_HTTP_BASIC_AP_ARTIFACTORY_USERNAME: "${{ secrets.JF_USER }}"
-      POETRY_HTTP_BASIC_AP_ARTIFACTORY_PASSWORD: "${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}"
+      POETRY_HTTP_BASIC_AP_PYPI_REMOTE_ARTIFACTORY_USERNAME: "${{ secrets.JF_USER }}"
+      POETRY_HTTP_BASIC_AP_PYPI_REMOTE_ARTIFACTORY_PASSWORD: "${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}"
 
     steps:
       - name: Log in to Artifactory Docker Registry
@@ -37,11 +37,6 @@ jobs:
       - name: List repo files
         run: ls -R
 
-      - name: Configure Poetry auth
-        run: |
-           poetry config http-basic.ap-pypi-remote ${{ secrets.JF_USER }} ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
-
-
       - name: Verify Python build files
         run: |
           if [ ! -f "pyproject.toml" ] && [ ! -f "requirements.txt" ]; then
@@ -56,8 +51,8 @@ jobs:
           pack build $IMAGE_NAME \
             --builder $BUILDER \
             --trust-builder \
-            -e POETRY_HTTP_BASIC_AP_ARTIFACTORY_USERNAME="$POETRY_HTTP_BASIC_AP_ARTIFACTORY_USERNAME" \
-            -e POETRY_HTTP_BASIC_AP_ARTIFACTORY_PASSWORD="$POETRY_HTTP_BASIC_AP_ARTIFACTORY_PASSWORD"
+            -e POETRY_HTTP_BASIC_AP_PYPI_REMOTE_ARTIFACTORY_USERNAME="$POETRY_HTTP_BASIC_AP_PYPI_REMOTE_ARTIFACTORY_USERNAME" \
+            -e POETRY_HTTP_BASIC_AP_PYPI_REMOTE_ARTIFACTORY_PASSWORD="$POETRY_HTTP_BASIC_AP_PYPI_REMOTE_ARTIFACTORY_PASSWORD"
 
       - name: Verify built image
         run: docker images | grep $IMAGE_NAME
