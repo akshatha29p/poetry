@@ -37,6 +37,11 @@ jobs:
       - name: List repo files
         run: ls -R
 
+      - name: Configure Poetry auth
+        run: |
+           poetry config http-basic.ap-pypi-remote ${{ secrets.JF_USER }} ${{ secrets.ARTIFACTORY_ACCESS_TOKEN }}
+
+
       - name: Verify Python build files
         run: |
           if [ ! -f "pyproject.toml" ] && [ ! -f "requirements.txt" ]; then
